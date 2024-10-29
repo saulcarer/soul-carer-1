@@ -124,7 +124,57 @@ h1{
         <div id="test">time and date loading....</div>
         <div id="time"></div>
         </form>
-  <script src="main.js"></script>
+  <script>// my time clock 
+window.onload = function() {
+    printTime();
+};
+
+function printTime() {
+    var d = new Date();
+    var hours = d.getHours();
+    var mins = d.getMinutes();
+    var secs = d.getSeconds();
+    var day = d.getDay();
+    var date = d.getDate();
+    var month = d.getMonth() + 1;  // Month is 0-based in JavaScript
+    var year = d.getFullYear();
+    
+    // Convert day number to day name
+    var daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    day = daysOfWeek[day];
+    
+    // am or pm
+    var ampm=hours>=12? "PM":"AM";
+    hours=hours%12;
+    hours=hours? hours:12;
+    
+    // Format hours, minutes, and seconds
+    hours = hours < 10 ? "0" + hours : hours;
+    mins = mins < 10 ? "0" + mins : mins;
+    secs = secs < 10 ? "0" + secs : secs;
+   
+    // Display formatted time
+    document.getElementById("test").innerHTML = hours + ":" + mins + ":" + secs + " " + ampm;
+    document.getElementById("time").innerHTML = day + ", " + date + "." + month + "." + year;
+}
+
+// Update the time every second
+setInterval(printTime, 1000);
+
+
+//slide show for head images
+  let slideIndex = 0;
+
+  function showSlides() {
+    const slides = document.querySelectorAll(".slide");
+    slides.forEach((slide) => (slide.style.display = "none")); // Hide all slides
+    slideIndex = (slideIndex + 1) % slides.length; // Increment index
+    slides[slideIndex].style.display = "block"; // Display the next slide
+  }
+
+  showSlides(); // Display the first slide
+  setInterval(showSlides, 3000); // Change image every 3 seconds
+</script>
 </body>
 </html>
 
